@@ -20,11 +20,9 @@ angular.module('psJwtApp')
 				return cachedToken;
 			},		
       isAuthenticated: function(){
-				console.log("auth");
 				return !!authToken.getToken();	
 			},		
 			removeToken: function(){
-				console.log("log out");
 				cachedToken = null;
 				storage.removeItem(userToken)
 			}

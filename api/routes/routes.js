@@ -30,4 +30,16 @@ module.exports = function(app){
 		
 	});
 	
+	
+	
+	var jobs =['Cook', 'SuperHero', 'Unicorn Whisperer', 'Toast Master'];
+	
+	app.get('/api/jobs', function(req, res){
+		
+		if (!req.headers.authorization){
+			return res.status(401).send({message: "You are not authorized!"});
+		}
+		res.json(jobs);
+	});
+	
 }
