@@ -16,7 +16,7 @@ module.exports = function(app){
 		// JWT PAYLOAD
 		var payload = {
 			iss: req.hostname,
-			sub: user._id
+			sub: newUser.id
 		}
 		
 		// JWT TOKEN
@@ -37,8 +37,20 @@ module.exports = function(app){
 	app.get('/api/jobs', function(req, res){
 		
 		if (!req.headers.authorization){
-			return res.status(401).send({message: "You are not authorized!"});
+			return res.status(401).send({
+				message: "You are not authorized!"
+			});
 		}
+		
+		var token = req.headers.authorization.split(' ')[1];		
+		var payload = jwt.decode(token);
+		
+		if (!payload.sub){
+			return res.status(401).send({
+				message: "Authentication failed."
+			})
+		}
+		
 		res.json(jobs);
 	});
 	
