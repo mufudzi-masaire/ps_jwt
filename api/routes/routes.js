@@ -1,7 +1,9 @@
 module.exports = function(app){
 
 	var User = require('../models/user'),
-			jwt = require('../services/jwt');
+			configs = require('../configs/configs'),
+			secret = configs.jwt.secret,
+			jwt = require('jwt-simple');
 	
 	app.post('/api/register', function(req, res){
 		var user = req.body;
@@ -20,7 +22,7 @@ module.exports = function(app){
 		}
 		
 		// JWT TOKEN
-		var token = jwt.encode(payload);
+		var token = jwt.encode(payload, secret);
 		
 		// persist object
 		newUser.save(function(err){
@@ -43,7 +45,7 @@ module.exports = function(app){
 		}
 		
 		var token = req.headers.authorization.split(' ')[1];		
-		var payload = jwt.decode(token);
+		var payload = jwt.decode(token, secret);
 		
 		if (!payload.sub){
 			return res.status(401).send({
