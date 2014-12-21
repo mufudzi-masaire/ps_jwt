@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module'psJwtApp')
-	.controller('headerCtrl', function($scope, authToken){
-		
-		$scope.isAuthenticated = authToken.isAuthenticated;
-
-});
+angular.module('psJwtApp')
+  .controller('HeaderCtrl', function($scope, authToken) {
+    $scope.isAuthenticated = authToken.isAuthenticated;
+  });
