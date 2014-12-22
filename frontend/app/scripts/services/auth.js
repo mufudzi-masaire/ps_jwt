@@ -18,21 +18,22 @@ angular.module('psJwtApp')
 			return $http.post(loginUrl, { 
 				email: email, 
 				password: password 
-			}).success(function(res){
-					authToken.setToken(res.token);
-					$state.go('main');
-			});
-		};
+			}).success(authSuccess);
+		}
 		
 	
 		this.register = function(email, password){
 			return $http.post(registerUrl, { 
 					email: email, 
 					password: password 
-				}).success(function(res){
-					authToken.setToken(res.token);
-					$state.go('main');
-				});
+				}).success(authSuccess);
+		}
+		
+		//PRIVATE METHODS
+		
+		function authSuccess(res){
+			authToken.setToken(res.token);
+			$state.go('main');
 		}
 		
   });
