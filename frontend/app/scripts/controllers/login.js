@@ -1,28 +1,17 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name psJwtApp.controller:LoginCtrl
- * @description
- * # LoginCtrl
- * Controller of the psJwtApp
- */
 angular.module('psJwtApp')
-  .controller('LoginCtrl', function ($scope, $http, alert, authToken, API_URL) {
-    $scope.submit = function(){
-			var url = API_URL + '/login'
-			var user = {
-				email: $scope.email,
-				password: $scope.password
-			}
-			
-			$http.post(url, user)
+  .controller('LoginCtrl', function ($scope, $state, alert, auth) {
+    
+		$scope.submit = function(){	
+			auth.login($scope.email, $scope.password)
 				.success(function(res){
 					alert('success', 'Welcome bak ', res.user.email);
-					authToken.setToken(res.token);
+					$state.go('main');
 				})
 				.error(function(err){
-					alert('warning', "Oops! ", err.message);
+					alert('warning', 'Oops! ', err.message);
 				});
 		}
+		
   });
