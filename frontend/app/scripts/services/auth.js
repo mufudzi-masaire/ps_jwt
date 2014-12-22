@@ -8,7 +8,7 @@
  * Service in the psJwtApp.
  */
 angular.module('psJwtApp')
-  .service('auth', function ($http, API_URL, authToken) {		
+  .service('auth', function ($http, $state, API_URL, authToken) {		
 		
 		var url = API_URL + '/login'
 		this.login = function (email, password){
@@ -17,6 +17,7 @@ angular.module('psJwtApp')
 				password: password 
 			}).success(function(res){
 					authToken.setToken(res.token);
+					$state.go('main');
 				});
 		}
 		
