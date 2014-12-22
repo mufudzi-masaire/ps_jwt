@@ -29,10 +29,9 @@ module.exports = function(app){
 	app.post('/api/login', function(req, res){
 		var searchUser = {email: req.body.email};	
 		User.findOne(searchUser, function(err, user){
-			if (err) throw err	
-			if (!user) return res.status(401).send({ message: "Wrong email/password!"});							 
+			if (err || !user)  return res.status(401).send({ message: "Wrong email/password!"});					 
 			user.comparePasswords(req.body.password, function(err, isMatch){
-				if (err) throw err		
+				if (err) return res.status(401).send({ message: "Wrong email/password!"});	
 				if (isMatch) return jwtService.createSendToken(user, res);	
 				if (!isMatch) return res.status(401).send({ message: "Wrong email/password!"});		
 			});
