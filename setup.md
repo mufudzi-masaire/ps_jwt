@@ -1,4 +1,4 @@
-#JWT Example Setup
+#JWT Example App Setup
 
 ###Working Locally 
 
@@ -13,7 +13,7 @@ The dev db is called psjwt if you are debugging inside the MongoDB console
 
 ####API SETUP
 
-	cd pw_jwt/api && npm install
+	cd ps_jwt/api && npm install
 	nodemon
 	
 Server runs on port 3000 in dev env.
@@ -26,7 +26,7 @@ You can use Chrome's postman app's RESTFUL interface to debug the api
 ####FRONTEND SETUP
 (in a new/seperate terminal)
 
-	cd pw_jwt/frontend && npm install && bower install
+	cd ps_jwt/frontend && npm install && bower install
 	grunt serve
 
 Frontend Server runs on port 9000 in dev env.
